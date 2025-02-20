@@ -66,6 +66,7 @@ print("Classification report:\n", classification_report(y_test, y_pred))
 - Precision (1.00 for both classes): The model rarely misclassifies fraud as non-fraud (few false positives).
 - Recall (1.00 for both classes): The model correctly identifies almost all fraud cases (few false negatives).
 - F1-score (1.00 for both classes): This is the balance between precision and recall, showing the model is excellent at fraud detection.
+Other models including Random Forest and XGBoost are also evaluated to investigate their performances and select the best performing model.
 
 ## Building Predictive Model (Random Forest)
 ```
