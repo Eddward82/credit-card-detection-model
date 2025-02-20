@@ -101,4 +101,24 @@ The results above shows the following:
 ## Train and Evaluate XGBoost
 XGBoost (Extreme Gradient Boosting) is an optimized gradient boosting algorithm that works exceptionally well on structured data.
 
-  
+### Importing the Necessary Libraries and Fit the Model
+```
+import xgboost as xgb
+from sklearn.metrics import accuracy_score
+xgb_model = xgb.XGBClassifier(n_estimators=100, random_state=42, scale_pos_weight=len(y_train[y_train == 0]) / len(y_train[y_train == 1]))
+xgb_model.fit(X_train, y_train)
+y_pred_xgb = xgb_model.predict(X_test)
+
+### Evakyate Performance
+The performance of this model is evaluted  using the code snippet below:
+```
+print(classification_report(y_test, y_pred_xgb))
+print("ROC-AUC Score:", roc_auc_score(y_test, y_pred_xgb))
+```
+![image](https://github.com/user-attachments/assets/5d6e4ecc-b41a-45ea-8fc9-1de3a60cf124)
+The result above shows that the model
+- has high precision level
+- has high recall level
+- F1-Score: 1.00 for both classes → This means a perfect balance between precision and recall.
+- Accuracy: 1.00 (100%) → The model classified all 113,726 instances correctly.
+- ROC-AUC Score: 0.9998 (~1.00) → The model has near-perfect discrimination between classes
