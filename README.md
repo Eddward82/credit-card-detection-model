@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/3528fcf3-a901-4d71-8866-856ef86c6558)# Credit-Card-Detection-Model      
+# Credit-Card-Detection-Model      
 ## Introduction
 Credit card fraud is a significant challenge in the financial industry, leading to substantial financial losses and security concerns. This project focuses on developing a machine learning-based fraud detection system to accurately identify fraudulent transactions while minimizing false positives. Using a real-world credit card fraud dataset, this model applies advanced data preprocessing techniques, feature engineering, and supervised learning algorithms to classify transactions as fraudulent or legitimate. The project explores various classification models, including Logistic Regression, Random Forest, XGBoost, and Neural Networks, comparing their performance in detecting fraud.
 ## Key Features for this Project
@@ -19,7 +19,6 @@ import pandas as pd
 df = pd.read_csv("creditcard_2023.csv")
 df.head()
 ```
-![image](https://github.com/user-attachments/assets/5bb28a2e-2ce6-47c3-8b3c-e0c148566f5e)
 ## Understanding the Dataset
 This involves checking dataset information and handling missing values if any
 ```
@@ -27,6 +26,8 @@ df.info()
 print(df.isnull().sum())
 print(df["Class"].value_counts())
 ```
+![image](https://github.com/user-attachments/assets/5bb28a2e-2ce6-47c3-8b3c-e0c148566f5e)
+
 The results show that there are 568630 rows and 31 columns, and that there is no null value
 ## Data Preprocessing
 Although fraud cases are rare but in this case, there is a balance between fraud and no fraud cases, and as such no need to use SMOTE command to balance the transactions. The dataset are divided into X and y segment for preparation for training and testing using the code snippet below:
@@ -49,8 +50,7 @@ model = LogisticRegression(max_iter=500, solver='lbfgs')
 model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 ```
-![image](https://github.com/user-attachments/assets/3e13b5dc-d7bd-48b9-b4fe-b9fd324aee16)
-
+![image](https://github.com/user-attachments/assets/3e13b5dc-d7bd-48b9-b4fe-b9fd324aee16)The output above shows that a Logistic Regression model has successfully been created with a max_iter=500 parameter.
 ## Model Evaluation
 Model evaluation is critical to building predictive model because it requires a highly reliable model that minimizes both false positives and false negatives. A well-evaluated model provides confidence that the predictions are reliable. To achive this, the following code snippets are used:
 ```
@@ -67,3 +67,38 @@ print("Classification report:\n", classification_report(y_test, y_pred))
 - Recall (1.00 for both classes): The model correctly identifies almost all fraud cases (few false negatives).
 - F1-score (1.00 for both classes): This is the balance between precision and recall, showing the model is excellent at fraud detection.
 
+## Building Predictive Model (Random Forest)
+```
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+```
+### Train and Evaluate Random Forest
+```
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, roc_auc_score
+rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_model.fit(X_train, y_train)
+y_pred_rf = rf_model.predict(X_test)
+```
+
+### Evaluate Performance
+```
+print(classification_report(y_test, y_pred_rf))
+print("ROC-AUC Score:", roc_auc_score(y_test, y_pred_rf))
+```
+![image](https://github.com/user-attachments/assets/5f363454-6ea0-47ea-8d3b-06dcee3f3669)
+The results above shows the following:
+- Precision (1.00 for both classes) → The model almost never misclassifies non-fraudulent transactions as fraud and vice versa.
+- Recall (1.00 for both classes) → The model captures nearly all actual fraud cases.
+- F1-score (1.00 for both classes) → Perfect balance between precision and recall.
+- Overall Accuracy = 100% (Model correctly classified all cases).
+- ROC-AUC Score = 0.9998 (~99.98%) → Measures how well the model separates fraud from non-fraud.
+- Closer to 1 means a nearly perfect classifier.
+
+## Train and Evaluate XGBoost
+XGBoost (Extreme Gradient Boosting) is an optimized gradient boosting algorithm that works exceptionally well on structured data.
+
+  
