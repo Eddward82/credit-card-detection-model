@@ -1,4 +1,4 @@
-# Credit-Card-Detection-Model      
+# Credit-Card-Fraud-Detection-Model      
 ## Introduction
 Credit card fraud is a significant challenge in the financial industry, leading to substantial financial losses and security concerns. This project focuses on developing a machine learning-based fraud detection system to accurately identify fraudulent transactions while minimizing false positives. Using a real-world credit card fraud dataset, this model applies advanced data preprocessing techniques, feature engineering, and supervised learning algorithms to classify transactions as fraudulent or legitimate. The project explores various classification models, including Logistic Regression, Random Forest, XGBoost, and Neural Networks, comparing their performance in detecting fraud.
 ## Key Features for this Project
